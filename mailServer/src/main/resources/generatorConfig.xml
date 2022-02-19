@@ -40,23 +40,13 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--相关表的配置 -->
-        <!--    <table tableName="admin" domainObjectName="Admin" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="collect" domainObjectName="Collect" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="comment" domainObjectName="Comment" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="consumer" domainObjectName="Consumer" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="list_song" domainObjectName="ListSong" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="rank_list" domainObjectName="RankList" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="singer" domainObjectName="Singer" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="song" domainObjectName="Song" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
-        <!--    <table tableName="song_list" domainObjectName="SongList" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <table tableName="draft_mail" domainObjectName="DraftMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
         <table tableName="mail" domainObjectName="Mail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table tableName="permission" domainObjectName="Permission" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table tableName="user_mail" domainObjectName="UserMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table tableName="user_permission" domainObjectName="UserPermission" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table  tableName="user" catalog="mail_server" domainObjectName="User" delimitIdentifiers="true">
+        <table tableName="received_mail" domainObjectName="ReceivedMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="sent_mail" domainObjectName="SentMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  tableName="user" catalog="mail_server" domainObjectName="User" delimitIdentifiers="true" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="User_id" sqlStatement="JDBC" />
+            <generatedKey column="user_id" sqlStatement="JDBC" />
         </table>
 
     </context>
