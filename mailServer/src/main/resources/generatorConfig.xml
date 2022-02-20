@@ -40,14 +40,14 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table tableName="draft_mail" domainObjectName="DraftMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+<!--        <table tableName="draft_mail" domainObjectName="DraftMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
         <table tableName="mail" domainObjectName="Mail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table tableName="received_mail" domainObjectName="ReceivedMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table tableName="sent_mail" domainObjectName="SentMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table  tableName="user" catalog="mail_server" domainObjectName="User" delimitIdentifiers="true" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-            <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="user_id" sqlStatement="JDBC" />
-        </table>
+<!--        <table tableName="received_mail" domainObjectName="ReceivedMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="sent_mail" domainObjectName="SentMail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table  tableName="user" catalog="mail_server" domainObjectName="User" delimitIdentifiers="true" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="ignoreQualifiersAtRuntime" value="true"/>-->
+<!--            <generatedKey column="user_id" sqlStatement="JDBC" />-->
+<!--        </table>-->
 
     </context>
 </generatorConfiguration>
