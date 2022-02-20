@@ -27,6 +27,12 @@
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectByMailAddress" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_email_address = #{userEmailAddress}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
