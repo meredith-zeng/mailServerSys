@@ -47,14 +47,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Result signUp(User user) {
+    public Result signUp(User record) {
         Result<User> result = new Result<>();
-        User res = userMapper.selectByMailAddress(user.getUserEmailAddress());
-        if (res != null){
+        if (userMapper.selectByMailAddress(record.getUserEmailAddress()) != null){
             result.setIsSuccess("Email Address exist", false);
             return result;
         }
-        if (userMapper.insert(user) == 1){
+        if (userMapper.insert(record) == 1){
             result.setIsSuccess("Signup success", true);;
         }
         return result;

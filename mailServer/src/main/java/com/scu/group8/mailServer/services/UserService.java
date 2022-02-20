@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 public interface UserService {
 
     Result<User> selectUserById(int userId);
-    Result login(User user);
-    Result signUp(User user);
+    Result login(User record);
+    Result signUp(User record);
     Result isLogin(HttpSession session);
 
 }
