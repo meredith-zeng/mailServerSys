@@ -1,17 +1,16 @@
-package com.scu.group8.mailServer.dto;
+package com.scu.group8.mailServer.vo;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class DraftDto {
+public class MailVo {
     private Integer mailId;
-    private Integer ownerId;
-    // 0: 草稿在草稿箱 1: 草稿已发送
-    private Integer draftStatus;
     private String senderEmailAddress;
     private String recipientEmailAddress;
     private String mailTitle;
     private String mailContent;
+    private Date createTime;
+    private Date updateTime;
 }
