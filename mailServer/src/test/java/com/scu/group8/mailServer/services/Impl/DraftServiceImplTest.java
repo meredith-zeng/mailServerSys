@@ -22,8 +22,8 @@ public class DraftServiceImplTest extends TestCase {
         draftDto.setOwnerId(1);
         draftDto.setDraftStatus(0);
         draftDto.setSenderEmailAddress("nakano1968@yahoo.com");
-        draftDto.setMailTitle("It's a draft 2.20");
-        draftDto.setMailContent("content");
+        draftDto.setMailTitle("It's a draft 2.21");
+        draftDto.setMailContent("draft content");
         draftService.insertDraft(draftDto);
     }
 
@@ -46,7 +46,7 @@ public class DraftServiceImplTest extends TestCase {
 
     @Test
     public void testQueryDraftByOwnerId() {
-        int ownerId = 1, page = 2, pageSize = 1;
+        int ownerId = 1, page = 1, pageSize = 2;
         draftService.queryDraftByOwnerId(ownerId, page, pageSize);
     }
 }

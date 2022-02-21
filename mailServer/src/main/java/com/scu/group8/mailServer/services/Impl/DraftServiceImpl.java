@@ -1,6 +1,7 @@
 package com.scu.group8.mailServer.services.Impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.scu.group8.mailServer.dao.DraftMailMapper;
 import com.scu.group8.mailServer.dao.MailMapper;
 import com.scu.group8.mailServer.dto.DraftDto;
@@ -29,7 +30,6 @@ public class DraftServiceImpl implements DraftService {
         Result result = new Result();
         Mail mail = new Mail();
         BeanUtils.copyProperties(record, mail);
-        mail.setIsDeleted(0);
         int mailInsertRes = mailMapper.insertSelective(mail);
         if (mailInsertRes == 0){
             result.setResultFailed("Insert Draft fail");
@@ -90,7 +90,8 @@ public class DraftServiceImpl implements DraftService {
             result.setResultFailed("Draft box is empty");
             return result;
         }
-        result.setResultSuccess("query draft success", draftVoList);
+        PageInfo<DraftVo> pageInfo = new PageInfo<>(draftVoList);
+        result.setResultSuccess("query draft success", pageInfo);
         return result;
     }
 }

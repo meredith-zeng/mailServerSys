@@ -8,5 +8,6 @@ public class ReceivedMail {
     private Integer ownerId;
     private Integer sentUserId;
     private Integer readStatus;
+    private Integer isDeleted;
 
 }

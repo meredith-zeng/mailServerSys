@@ -15,8 +15,6 @@ public class Mail {
 
     private Date createTime;
     private Date updateTime;
-    private Integer isDeleted;
-
-
+    private Date sendingTime;
     
 }
