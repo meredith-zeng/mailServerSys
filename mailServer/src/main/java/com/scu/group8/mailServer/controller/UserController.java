@@ -62,7 +62,7 @@ public class UserController {
         Result result = new Result();
         // User logout: The user information in the session can be set to null
         request.getSession().setAttribute(SESSION_NAME, null);
-        result.setIsSuccess("Logout success", true);
+        result.setResultSuccess("Logout success", "");
         return result;
     }
 

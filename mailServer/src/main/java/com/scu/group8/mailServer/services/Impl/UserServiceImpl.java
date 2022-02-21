@@ -31,16 +31,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(User user) {
-        Result<User> result = new Result<>();
+        Result result = new Result<>();
         User res = userMapper.selectByMailAddress(user.getUserEmailAddress());
         if (res == null){
-            result.setIsSuccess("Email Address not exist", false);
+            result.setResultFailed("Email Address not exist");
             return result;
         }
         if (res.getUserPassword().equals(user.getUserPassword())){
-            result.setIsSuccess("Login success", true);
+            result.setResultSuccess("Login success", "");
         }else{
-            result.setIsSuccess("Error password", false);
+            result.setResultFailed("Error password");
         }
         return result;
     }
@@ -48,13 +48,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result signUp(User record) {
-        Result<User> result = new Result<>();
+        Result result = new Result<>();
         if (userMapper.selectByMailAddress(record.getUserEmailAddress()) != null){
-            result.setIsSuccess("Email Address exist", false);
+            result.setResultFailed("Email Address exist");
             return result;
         }
         if (userMapper.insert(record) == 1){
-            result.setIsSuccess("Signup success", true);;
+            result.setResultSuccess("Signup success", "");
         }
         return result;
     }
@@ -64,15 +64,15 @@ public class UserServiceImpl implements UserService {
         Result result = new Result();
         User sessionUser = (User) session.getAttribute(UserController.SESSION_NAME);
         if (sessionUser == null){
-            result.setIsSuccess("Don't login yet", false);
+            result.setResultFailed("Don't login yet");
             return result;
         }
         User getUser = userMapper.selectByMailAddress(sessionUser.getUserEmailAddress());
         if (getUser == null || !getUser.getUserPassword().equals(sessionUser.getUserPassword())){
-            result.setIsSuccess("User Info invalid", false);
+            result.setResultFailed("User Info invalid");
             return result;
         }
-        result.setIsSuccess("User login", true);
+        result.setResultSuccess("User login", "");
         return result;
     }
 

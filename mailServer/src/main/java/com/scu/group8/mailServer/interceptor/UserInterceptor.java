@@ -13,11 +13,9 @@ public class UserInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 
-    // Controller方法执行之前
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 同样在这里调用用户服务传入session，判断用户是否登录或者有效
-        // 未登录则重定向至主页, 假设主页就是/
+        // If not logged in, redirect to the home page, assuming the home page is /
         if (!userService.isLogin(request.getSession()).isSuccess()) {
             response.sendRedirect("/");
             return false;
@@ -25,7 +23,6 @@ public class UserInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    // Controller方法执行之后
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 

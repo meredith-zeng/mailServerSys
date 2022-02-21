@@ -12,7 +12,7 @@ public class DraftVo {
     private String senderEmailAddress;
     private String recipientEmailAddress;
     private String mailTitle;
-    private byte[] mailContent;
+    private String mailContent;
     private Date createTime;
     private Date updateTime;
 }

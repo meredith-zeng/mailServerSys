@@ -14,4 +14,3 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-  returnPageInfo: check

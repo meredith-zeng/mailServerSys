@@ -6,11 +6,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-/**
- * 请求结果类
- *
- * @param <T> 数据体类型
- */
 @Setter
 @Getter
 @NoArgsConstructor
@@ -30,11 +25,7 @@ public class Result<T> implements Serializable {
         this.message = msg;
         this.isSuccess = false;
         this.data = null;
+
     }
 
-    public void setIsSuccess(String msg, boolean operationRes) {
-        this.message = msg;
-        this.isSuccess = operationRes;
-        this.data = null;
-    }
 }

@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface MailService {
     Result<Mail> selectMailByMailId(int mailId);
-    Result<List<Mail>> queryMails(List<Integer> mailIds, int page, int limit);
-
 }
