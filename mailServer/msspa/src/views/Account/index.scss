@@ -1,0 +1,49 @@
+.account-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .account-form {
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        flex-shrink: 0;
+        margin: 0 auto 50px;
+        width: 450px;
+        padding: 48px 40px 36px;
+    }
+
+    &::before {
+        content: '';
+        display: block;
+        min-height: 30px;
+        flex-grow: 1;
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        min-height: 60px;
+        flex-grow: 1;
+    }
+
+    .title-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .submit-btn {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .signup-text-box {
+        margin-top: 16px;
+        text-align: center;
+    }
+}
