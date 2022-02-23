@@ -11,6 +11,18 @@
     <result column="received_user_id" property="receivedUserId" jdbcType="INTEGER" />
     <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
   </resultMap>
+
+  <resultMap id="MailVoResultMap" type="com.scu.group8.mailServer.vo.MailVo" >
+    <id column="mail_id" property="mailId" jdbcType="INTEGER" />
+    <result column="sender_email_address" property="senderEmailAddress" jdbcType="VARCHAR" />
+    <result column="recipient_email_address" property="recipientEmailAddress" jdbcType="VARCHAR" />
+    <result column="mail_title" property="mailTitle" jdbcType="VARCHAR" />
+    <result column="mail_content" property="mailContent" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="sendingTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
   <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
@@ -80,6 +92,31 @@
         #{isDeleted,jdbcType=INTEGER},
       </if>
     </set>
+    where mail_id = #{mailId,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryOutboxMail" resultMap="MailVoResultMap" parameterType="java.lang.Integer" >
+    SELECT
+      mail.mail_id,
+      mail.sender_email_address,
+      mail.recipient_email_address,
+      mail.mail_content,
+      mail.mail_title,
+      mail.sending_time,
+      mail.create_time,
+      mail.update_time
+    FROM
+      mail,
+      sent_mail
+    WHERE
+      mail.mail_id = sent_mail.mail_id AND
+      sent_mail.is_deleted = 0 AND
+      sent_mail.owner_id = #{ownerId,jdbcType=INTEGER}
+  </select>
+  <update id="deleteOutboxMail" parameterType="java.lang.Integer" >
+    update sent_mail
+    set
+      is_deleted = 1
     where mail_id = #{mailId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,0 +1,10 @@
+package com.scu.group8.mailServer.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/mail")
+public class MailController {
+
+}

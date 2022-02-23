@@ -15,10 +15,10 @@
     <id column="mail_id" property="mailId" jdbcType="INTEGER" />
     <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
     <result column="draft_status" property="draftStatus" jdbcType="INTEGER" />
-
       <result column="sender_email_address" property="senderEmailAddress" jdbcType="VARCHAR" />
       <result column="recipient_email_address" property="recipientEmailAddress" jdbcType="VARCHAR" />
       <result column="mail_title" property="mailTitle" jdbcType="VARCHAR" />
+    <result column="mail_content" property="mailContent" jdbcType="LONGVARCHAR" />
       <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
       <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
       <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
