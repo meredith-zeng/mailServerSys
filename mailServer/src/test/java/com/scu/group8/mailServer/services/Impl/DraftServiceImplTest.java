@@ -39,7 +39,7 @@ public class DraftServiceImplTest extends TestCase {
 
     @Test
     public void testSelectDraftByMailId() {
-        int mailId = 16;
+        int mailId = 27;
         System.out.println(draftService.selectDraftByMailId(mailId).getData());
 
     }
