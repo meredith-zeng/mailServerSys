@@ -1,0 +1,86 @@
+.mail-container {
+  height: 100vh;
+
+  .header,
+  .sidebar,
+  .content {
+      background: #fff;
+  }
+
+  .header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgb(100 121 143 / 20%);
+      padding: 8px 20px;
+
+      .header-title {
+          font-size: 30px;
+      }
+
+      .header-icon {
+          font-size: 28px;
+          margin-right: 4px;
+      }
+
+      .icon-container {
+        display: flex;
+        align-items: center;
+        &:hover {
+            cursor: pointer;
+        }
+
+        span {
+          line-height: normal;
+        }
+      }
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+
+    .ant-layout-sider-children {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn-box {
+      border-right: 1px solid #f0f0f0;
+      text-align: center;
+      padding: 16px 22px;
+
+      button {
+        width: 100%;
+      }
+    }
+
+    .side-menu {
+      flex-grow: 1;
+    }
+    .ant-menu-item {
+      margin: 0;
+    }
+  }
+
+  .content {
+    overflow: auto;
+  }
+}
+
+.user-menu-pop {
+    .ant-popover-inner-content {
+        padding: 0;
+    }
+
+    .logout-btn {
+        padding: 8px 12px;
+        &:hover {
+            background-color: #eee;
+            cursor: pointer;
+        }
+    }
+}
+
+

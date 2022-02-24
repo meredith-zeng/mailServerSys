@@ -7,5 +7,4 @@ public class DraftMail {
     private Integer mailId;
     private Integer ownerId;
     private Integer draftStatus;
-
 }
