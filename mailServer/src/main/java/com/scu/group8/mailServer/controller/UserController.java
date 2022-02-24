@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value="/signUp",method= RequestMethod.POST)
+    @RequestMapping(value="/signup",method= RequestMethod.POST)
     public Result<User> register(@RequestBody @Valid User user, BindingResult errors, HttpServletRequest request) {
         Result<User> result;
         // If there is an error in the verification, return the registration failure and error message
@@ -47,7 +47,7 @@ public class UserController {
         }
         result = userService.login(user);
         if (result.isSuccess()) {
-            request.getSession().setAttribute(SESSION_NAME, result.getData());
+            request.getSession().setAttribute(SESSION_NAME, result.getData().getUserId());
         }
         return result;
     }
@@ -67,8 +67,19 @@ public class UserController {
     }
 
     @RequestMapping(value="/info",method= RequestMethod.GET)
-    public Result getUserInfo(@RequestParam Integer userId) {
-        return userService.selectUserById(userId);
+    public Result getUserInfo(HttpServletRequest request) {
+        Result result = new Result();
+        Object session = request.getSession().getAttribute(SESSION_NAME);
+
+        if (session == null){
+            result.setResultFailed("Userinfo is null");
+            return result;
+        }else {
+
+            int sessionUserId = Integer.valueOf((Integer) session);
+            return userService.selectUserById(sessionUserId);
+        }
+
     }
 
 }

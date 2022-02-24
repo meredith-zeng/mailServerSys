@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { MailTwoTone } from '@ant-design/icons';
-import { Form, Input, Button, Typography } from 'antd';
+import {Form, Input, Button, Typography, message} from 'antd';
+import { userLogin } from '../../data/api';
 
 const { Title, Text } = Typography;
 
 const Login: FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const onFinish = async (values: any) => {
+    const { error } = await userLogin(values);
+    if(!error) {
+      message.success('log in successfully!');
+      window.location.reload();
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

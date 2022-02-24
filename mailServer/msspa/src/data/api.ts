@@ -3,13 +3,13 @@ import { message } from 'antd';
 
 axios.defaults.withCredentials = true;
 
-const baseUrl = '';
-// const baseUrl = 'localhost:8000';
+// const baseUrl = '';
+const baseUrl = 'http://localhost:8080';
 
 const getData = async (axiosParams: any, showTip = true) => {
   try {
     const { data } = await axios(axiosParams);
-    if(data.code !== 200) {
+    if(!data.success) {
       if(showTip) {
         message.error(data.message);
       }
@@ -46,16 +46,16 @@ export const userLogin = async (params: any) => {
 }
 
 export const userInfo = async () => {
-  // return getData({
-  //   url: `${baseUrl}/user/info`,
-  // }, false)
+  return getData({
+    url: `${baseUrl}/user/info`,
+  }, false)
 
-  return {
-    data: {
-      username: 'testUserName',
-    },
-    error: null
-  }
+  // return {
+  //   data: {
+  //     username: 'testUserName',
+  //   },
+  //   error: null
+  // }
 }
 
 export const userSignup = async (params: any) => {
@@ -67,91 +67,91 @@ export const userSignup = async (params: any) => {
 }
 
 export const getMailList = async (params: any) => {
-  // return getData({
-  //   url: `${baseUrl}/mail/list`,
-  //   params,
-  // })
+  return getData({
+    url: `${baseUrl}/mail/list`,
+    params,
+  })
 
-  return {
-    data: {
-      total: 200,
-      page: 0,
-      list: [{
-        id: 1111,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 2222,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 3333,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 4444,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 55,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 66,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 77,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 88,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }, {
-        id: 99,
-        sender: 'xxxxxxxxx',
-        recipient: 'yyyyyyyyy',
-        title: 'imtitleimtitleimtitleimtitleimtitle',
-        content: 'imcontentimcontentimcontentimcontentimcontent',
-        sendingTime: 1645468819229,
-        status: 0,
-      }]
-    },
-    error: null
-  };
+  // return {
+  //   data: {
+  //     total: 200,
+  //     page: 0,
+  //     list: [{
+  //       id: 1111,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 2222,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 3333,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 4444,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 55,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 66,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 77,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 88,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }, {
+  //       id: 99,
+  //       sender: 'xxxxxxxxx',
+  //       recipient: 'yyyyyyyyy',
+  //       title: 'imtitleimtitleimtitleimtitleimtitle',
+  //       content: 'imcontentimcontentimcontentimcontentimcontent',
+  //       sendingTime: 1645468819229,
+  //       status: 0,
+  //     }]
+  //   },
+  //   error: null
+  // };
 }
 
 export const readMail = async (params: any) => {
