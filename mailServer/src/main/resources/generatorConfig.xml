@@ -3,7 +3,8 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <classPathEntry location="G:\2022 winter\COEN275 - OOD and UML\Final Project\mailServer\mailServer\src\main\resources\mysql-connector-java-8.0.13.jar"/>
+    <classPathEntry location="Documents\GitHub\mailServerSys\mailServer\src\main\resources\mysql-connector-java-8.0.13.jar"/>
+<!--    <classPathEntry location="G:\2022 winter\COEN275 - OOD and UML\Final Project\mailServer\mailServer\src\main\resources\mysql-connector-java-8.0.13.jar"/>-->
 
     <context id="context" targetRuntime="MyBatis3">
         <commentGenerator>
