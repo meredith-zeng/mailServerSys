@@ -30,15 +30,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result login(User user) {
-        Result result = new Result<>();
+    public Result<User> login(User user) {
+        Result<User> result = new Result<>();
         User res = userMapper.selectByMailAddress(user.getUserEmailAddress());
         if (res == null){
             result.setResultFailed("Email Address not exist");
             return result;
         }
         if (res.getUserPassword().equals(user.getUserPassword())){
-            result.setResultSuccess("Login success", "");
+            result.setResultSuccess("Login success", res);
         }else{
             result.setResultFailed("Error password");
         }

@@ -67,19 +67,18 @@ public class UserController {
     }
 
     @RequestMapping(value="/info",method= RequestMethod.GET)
-    public Result getUserInfo(HttpServletRequest request) {
-        Result result = new Result();
+    public Result<User> getUserInfo(HttpServletRequest request) {
+        Result<User> result = new Result<>();
         Object session = request.getSession().getAttribute(SESSION_NAME);
 
         if (session == null){
             result.setResultFailed("Userinfo is null");
             return result;
         }else {
-
-            int sessionUserId = Integer.valueOf((Integer) session);
-            return userService.selectUserById(sessionUserId);
+            int sessionUserId = (int)session;
+            result.setResultSuccess("get user info success", userService.selectUserById(sessionUserId).getData());
+            return result;
         }
-
     }
 
 }

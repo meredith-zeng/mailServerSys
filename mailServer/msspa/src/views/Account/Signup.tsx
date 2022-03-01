@@ -11,7 +11,7 @@ const Signup: FC = () => {
     const { error } = await userSignup(values);
     if(!error) {
       message.success('Sign up successfully!');
-      navigate('/user/login');
+      window.location.reload();
     }
   };
 
@@ -31,7 +31,7 @@ const Signup: FC = () => {
       >
         <Form.Item
           label="Username"
-          name="username"
+          name="userEmailAddress"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
           <Input />
@@ -39,7 +39,7 @@ const Signup: FC = () => {
 
         <Form.Item
           label="Password"
-          name="password"
+          name="userPassword"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
           <Input.Password />

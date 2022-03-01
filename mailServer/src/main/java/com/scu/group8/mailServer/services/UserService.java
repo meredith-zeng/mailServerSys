@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 public interface UserService {
 
     Result<User> selectUserById(int userId);
-    Result login(User record);
+    Result<User> login(User record);
     Result signUp(User record);
     Result isLogin(HttpSession session);
 

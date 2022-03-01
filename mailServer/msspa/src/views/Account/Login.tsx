@@ -34,7 +34,7 @@ const Login: FC = () => {
       >
         <Form.Item
           label="Username"
-          name="username"
+          name="userEmailAddress"
           rules={[{ required: true, message: 'Please input your username' }]}
         >
           <Input />
@@ -42,7 +42,7 @@ const Login: FC = () => {
 
         <Form.Item
           label="Password"
-          name="password"
+          name="userPassword"
           rules={[{ required: true, message: 'Please input your password' }]}
         >
           <Input.Password />
