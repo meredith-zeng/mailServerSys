@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
         User res= userMapper.selectByPrimaryKey(userId);
         if (res != null){
             result.setResultSuccess("selectUserById success", res);
-
         }else {
             result.setResultFailed("selectUserById error");
         }
