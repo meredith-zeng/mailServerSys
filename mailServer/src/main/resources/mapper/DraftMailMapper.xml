@@ -11,18 +11,15 @@
     <result column="draft_status" property="draftStatus" jdbcType="INTEGER" />
   </resultMap>
 
-  <resultMap id="DraftVoResultMap" type="com.scu.group8.mailServer.vo.DraftVo" >
+  <resultMap id="MailVoResultMap" type="com.scu.group8.mailServer.vo.MailVo" >
     <id column="mail_id" property="mailId" jdbcType="INTEGER" />
-    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
-    <result column="draft_status" property="draftStatus" jdbcType="INTEGER" />
-      <result column="sender_email_address" property="senderEmailAddress" jdbcType="VARCHAR" />
-      <result column="recipient_email_address" property="recipientEmailAddress" jdbcType="VARCHAR" />
-      <result column="mail_title" property="mailTitle" jdbcType="VARCHAR" />
+    <result column="sender_email_address" property="senderEmailAddress" jdbcType="VARCHAR" />
+    <result column="recipient_email_address" property="recipientEmailAddress" jdbcType="VARCHAR" />
+    <result column="mail_title" property="mailTitle" jdbcType="VARCHAR" />
     <result column="mail_content" property="mailContent" jdbcType="LONGVARCHAR" />
-      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-      <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
-
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="sendingTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
@@ -82,7 +79,7 @@
     where mail_id = #{mailId,jdbcType=INTEGER}
   </update>
 
-  <select id="queryDraftByOwnerId" resultMap="DraftVoResultMap" parameterType="java.lang.Integer" >
+  <select id="queryDraftByOwnerId" resultMap="MailVoResultMap" parameterType="java.lang.Integer" >
     SELECT
       draft_mail.mail_id,
       draft_mail.owner_id,
@@ -98,6 +95,8 @@
       mail
     WHERE
       draft_mail.owner_id = #{ownerId,jdbcType=INTEGER} AND
-      draft_mail.mail_id = mail.mail_id
+      draft_mail.mail_id = mail.mail_id AND
+      draft_mail.draft_status = 0
+    ORDER BY mail.update_time DESC
   </select>
 </mapper>

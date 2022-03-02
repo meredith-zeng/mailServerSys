@@ -1,6 +1,5 @@
 package com.scu.group8.mailServer.services.Impl;
 
-import com.scu.group8.mailServer.dto.DraftDto;
 import com.scu.group8.mailServer.services.DraftService;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
@@ -15,27 +14,6 @@ public class DraftServiceImplTest extends TestCase {
 
     @Autowired
     DraftService draftService;
-
-    @Test
-    public void testInsertDraft() {
-        DraftDto draftDto = new DraftDto();
-        draftDto.setOwnerId(1);
-        draftDto.setDraftStatus(0);
-        draftDto.setSenderEmailAddress("nakano1968@yahoo.com");
-        draftDto.setMailTitle("It's a draft 2.21");
-        draftDto.setMailContent("draft content");
-        draftService.insertDraft(draftDto);
-    }
-
-    @Test
-    public void testUpdateDraft() {
-        DraftDto draftDto = new DraftDto();
-        draftDto.setMailId(16);
-        draftDto.setMailTitle("Go ahead");
-        draftDto.setMailContent("Update test");
-        draftDto.setRecipientEmailAddress("wfl@yahoo.com");
-        draftService.updateDraft(draftDto);
-    }
 
     @Test
     public void testSelectDraftByMailId() {

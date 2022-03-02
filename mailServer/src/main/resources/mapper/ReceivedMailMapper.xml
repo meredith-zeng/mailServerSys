@@ -140,5 +140,6 @@
       mail.mail_id = received_mail.mail_id AND
       received_mail.is_deleted = 0 AND
       received_mail.owner_id = #{ownerId,jdbcType=INTEGER}
+    ORDER BY mail.sending_time DESC
   </select>
 </mapper>

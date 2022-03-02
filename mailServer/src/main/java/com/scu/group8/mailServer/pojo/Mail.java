@@ -12,9 +12,8 @@ public class Mail {
     private String recipientEmailAddress;
     private String mailTitle;
     private String mailContent;
+    private Date sendingTime;
 
     private Date createTime;
     private Date updateTime;
-    private Date sendingTime;
-    
 }

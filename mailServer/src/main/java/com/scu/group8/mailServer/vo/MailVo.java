@@ -11,8 +11,9 @@ public class MailVo {
     private String recipientEmailAddress;
     private String mailTitle;
     private String mailContent;
-    private Date createTime;
-    private Date updateTime;
     private Date sendingTime;
     private Integer readStatus;
+
+    private Date createTime;
+    private Date updateTime;
 }

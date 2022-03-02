@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MailService {
     Result<Mail> selectMailByMailId(int mailId);
-    Result sendMail(MailDto mailDto);
+    Result<String> sendMail(MailDto mailDto);
 }

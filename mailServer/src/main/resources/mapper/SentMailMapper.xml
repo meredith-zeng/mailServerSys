@@ -112,6 +112,7 @@
       mail.mail_id = sent_mail.mail_id AND
       sent_mail.is_deleted = 0 AND
       sent_mail.owner_id = #{ownerId,jdbcType=INTEGER}
+    ORDER BY mail.sending_time DESC
   </select>
   <update id="deleteOutboxMail" parameterType="java.lang.Integer" >
     update sent_mail

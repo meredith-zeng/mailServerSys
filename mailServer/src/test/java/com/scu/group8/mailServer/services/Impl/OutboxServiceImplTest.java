@@ -1,5 +1,6 @@
 package com.scu.group8.mailServer.services.Impl;
 
+import com.github.pagehelper.PageInfo;
 import com.scu.group8.mailServer.services.OutboxService;
 import com.scu.group8.mailServer.utils.Result;
 import com.scu.group8.mailServer.vo.MailVo;
@@ -21,7 +22,7 @@ public class OutboxServiceImplTest extends TestCase {
     @Test
     public void testQueryOutboxMail() {
         int ownerId = 1, page = 1, pageSize = 1;
-        Result<MailVo> list = outboxService.queryOutboxMail(ownerId, page, pageSize);
+        Result<PageInfo<MailVo>> list = outboxService.queryOutboxMail(ownerId, page, pageSize);
         System.out.println(list.getData());
 
     }

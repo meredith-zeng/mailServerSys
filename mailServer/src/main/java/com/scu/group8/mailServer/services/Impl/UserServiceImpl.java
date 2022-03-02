@@ -1,14 +1,11 @@
 package com.scu.group8.mailServer.services.Impl;
 
-import com.scu.group8.mailServer.controller.UserController;
 import com.scu.group8.mailServer.dao.UserMapper;
 import com.scu.group8.mailServer.pojo.User;
 import com.scu.group8.mailServer.services.UserService;
 import com.scu.group8.mailServer.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -46,8 +43,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Result signUp(User record) {
-        Result result = new Result<>();
+    public Result<String> signUp(User record) {
+        Result<String> result = new Result<>();
         if (userMapper.selectByMailAddress(record.getUserEmailAddress()) != null){
             result.setResultFailed("Email Address exist");
             return result;
@@ -57,22 +54,4 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
-
-    @Override
-    public Result isLogin(HttpSession session) {
-        Result result = new Result();
-        User sessionUser = (User) session.getAttribute(UserController.SESSION_NAME);
-        if (sessionUser == null){
-            result.setResultFailed("Don't login yet");
-            return result;
-        }
-        User getUser = userMapper.selectByMailAddress(sessionUser.getUserEmailAddress());
-        if (getUser == null || !getUser.getUserPassword().equals(sessionUser.getUserPassword())){
-            result.setResultFailed("User Info invalid");
-            return result;
-        }
-        result.setResultSuccess("User login", "");
-        return result;
-    }
-
 }

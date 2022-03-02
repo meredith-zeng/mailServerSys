@@ -50,9 +50,4 @@ public class UserServiceImplTest{
         Result result = userService.signUp(user);
         System.out.println(result.getMessage());
     }
-
-    @Test
-    public void testIsLogin(){
-
-    }
 }

@@ -1,61 +1,81 @@
 package com.scu.group8.mailServer.controller;
 
-import com.scu.group8.mailServer.dto.DraftDto;
+import com.github.pagehelper.PageInfo;
 import com.scu.group8.mailServer.dto.MailDto;
-import com.scu.group8.mailServer.services.DraftService;
-import com.scu.group8.mailServer.services.InboxService;
-import com.scu.group8.mailServer.services.MailService;
-import com.scu.group8.mailServer.services.OutboxService;
+import com.scu.group8.mailServer.pojo.User;
+import com.scu.group8.mailServer.services.*;
 import com.scu.group8.mailServer.utils.Result;
-import com.scu.group8.mailServer.vo.DraftVo;
+import com.scu.group8.mailServer.utils.Session;
+import com.scu.group8.mailServer.vo.MailVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @RestController
+@RequestMapping(value = "/mail")
 public class MailController {
-    public static final String SESSION_NAME = "userInfo";
 
     @Autowired
     private DraftService draftService;
-    private MailService mailService;
+    @Autowired
     private InboxService inboxService;
+    @Autowired
     private OutboxService outboxService;
+    @Autowired
+    private MailService mailService;
 
-    //Draft Email
-    @RequestMapping(value = "mail/draft", method = RequestMethod.POST)
-    public Result<DraftVo> insertDraft(@RequestBody DraftDto draftDto, HttpServletRequest request){
-        Result result;
-        int ownerId = Integer.valueOf((Integer) request.getSession().getAttribute(SESSION_NAME));
-        draftDto.setOwnerId(ownerId);
-        result = draftService.insertDraft(draftDto);
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result<PageInfo<MailVo>> insertDraft(@RequestParam Integer category, @RequestParam Integer page, @RequestParam Integer size, HttpServletRequest request) {
+        Result<PageInfo<MailVo>> result = new Result<>();
+        User user = Session.getUserInfo(request);
+        if(category == 2) {
+            result = inboxService.queryInboxMail(user.getUserId(), page, size);
+        } else if(category == 1) {
+            result = outboxService.queryOutboxMail(user.getUserId(), page, size);
+        } else if(category == 0) {
+        }
+
         return result;
     }
 
-    //Send Email
-    @RequestMapping(value = "mail/send", method = RequestMethod.POST)
-    public Result sendMail(@RequestBody MailDto mailDto, HttpServletRequest request) {
+    @RequestMapping(value = "/read", method = RequestMethod.POST)
+    public Result<String> readMail(@RequestBody MailDto mailDto, HttpServletRequest request) {
+        User user = Session.getUserInfo(request);
+        return inboxService.readInboxMail(mailDto.getMailId());
+    }
+
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public Result<String> sendMail(@RequestBody MailDto mailDto, HttpServletRequest request) {
+        User user = Session.getUserInfo(request);
+        mailDto.setSenderId(user.getUserId());
+        mailDto.setSenderEmailAddress(user.getUserEmailAddress());
+        mailDto.setSendingTime(new Date());
+        return mailService.sendMail(mailDto);
+    }
+
+    @RequestMapping(value = "/draft", method = RequestMethod.POST)
+    public Result insertDraft(@RequestBody MailDto mailDto, HttpServletRequest request){
         Result result;
-        int senderId = Integer.valueOf((Integer) request.getSession().getAttribute(SESSION_NAME));
-        mailDto.setSenderId(senderId);
-        result = mailService.sendMail(mailDto);
+        User user = Session.getUserInfo(request);
+        mailDto.setSenderId(user.getUserId());
+        if(mailDto.getMailId() != null) {
+            result = draftService.updateDraft(mailDto);
+        } else {
+            result = draftService.insertDraft(mailDto);
+        }
         return result;
     }
 
-    //Delete Inbox Email
-    @RequestMapping(value = "/mail/deleteInbox", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteInbox", method = RequestMethod.POST)
     public Result deleteInboxMail(@RequestBody MailDto mailDto, HttpServletRequest request) {
         Result result;
         result = inboxService.deleteInboxMail(mailDto.getMailId());
         return result;
     }
 
-    //Delete Outbox Email
-    @RequestMapping(value = "/mail/deleteOutbox", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteOutbox", method = RequestMethod.POST)
     public Result deleteOutboxMail(@RequestBody MailDto mailDto, HttpServletRequest request) {
         Result result;
         result = outboxService.deleteOutboxMail(mailDto.getMailId());

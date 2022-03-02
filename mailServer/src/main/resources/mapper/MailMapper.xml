@@ -68,6 +68,9 @@
       <if test="mailTitle != null" >
         mail_title,
       </if>
+      <if test="sendingTime != null" >
+        sending_time,
+      </if>
       <if test="createTime != null" >
         create_time,
       </if>

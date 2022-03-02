@@ -1,18 +1,13 @@
 package com.scu.group8.mailServer.services;
 
-import com.scu.group8.mailServer.dto.DraftDto;
-import com.scu.group8.mailServer.pojo.DraftMail;
-import com.scu.group8.mailServer.pojo.Mail;
+import com.github.pagehelper.PageInfo;
+import com.scu.group8.mailServer.dto.MailDto;
 import com.scu.group8.mailServer.utils.Result;
-import com.scu.group8.mailServer.vo.DraftVo;
-
-import java.util.List;
+import com.scu.group8.mailServer.vo.MailVo;
 
 public interface DraftService {
-    Result insertDraft(DraftDto record);
-    Result updateDraft(DraftDto record);
+    Result insertDraft(MailDto mailDto);
+    Result updateDraft(MailDto mailDto);
 
-    Result<DraftVo> selectDraftByMailId(int mailId);
-
-    Result<List<DraftVo>> queryDraftByOwnerId(int ownerId, int page, int pageSize);
+    Result<PageInfo<MailVo>> queryDraftByOwnerId(int ownerId, int page, int pageSize);
 }

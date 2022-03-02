@@ -20,12 +20,16 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
+    public void setResultSuccess(String msg) {
+        this.message = msg;
+        this.isSuccess = true;
+        this.data = null;
+    }
 
     public void setResultFailed(String msg) {
         this.message = msg;
         this.isSuccess = false;
         this.data = null;
-
     }
 
 }

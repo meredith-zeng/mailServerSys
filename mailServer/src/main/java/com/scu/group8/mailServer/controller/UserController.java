@@ -3,6 +3,7 @@ package com.scu.group8.mailServer.controller;
 import com.scu.group8.mailServer.pojo.User;
 import com.scu.group8.mailServer.services.UserService;
 import com.scu.group8.mailServer.utils.Result;
+import com.scu.group8.mailServer.utils.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,55 +14,40 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
-    public static final String SESSION_NAME = "userInfo";
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(value="/signup",method= RequestMethod.POST)
-    public Result<User> register(@RequestBody @Valid User user, BindingResult errors, HttpServletRequest request) {
-        Result<User> result;
-        // If there is an error in the verification, return the registration failure and error message
+    public Result<String> register(@RequestBody @Valid User user, BindingResult errors) {
+        Result<String> result = new Result<>();
+        // Error Handler
         if (errors.hasErrors()) {
-            result = new Result<>();
             result.setResultFailed(errors.getFieldError().getDefaultMessage());
             return result;
         }
-        // call signUp service
-        result = userService.signUp(user);
-        // If signUp is successful, set the session
-        if (result.isSuccess()) {
-            request.getSession().setAttribute(SESSION_NAME, result.getData());
-        }
-        return result;
+        return userService.signUp(user);
     }
 
     @RequestMapping(value="/login",method= RequestMethod.POST)
     public Result<User> login(@RequestBody @Valid User user, BindingResult errors, HttpServletRequest request) {
-        Result<User> result;
-        // If there is an error in the verification, return the login failure and error message
+        Result<User> result = new Result<>();
         if (errors.hasErrors()) {
-            result = new Result<>();
             result.setResultFailed(errors.getFieldError().getDefaultMessage());
             return result;
         }
         result = userService.login(user);
+        // set session
         if (result.isSuccess()) {
-            request.getSession().setAttribute(SESSION_NAME, result.getData().getUserId());
+            Session.setUserInfo(request, result.getData());
         }
         return result;
     }
 
-    @RequestMapping(value="/isLogin",method= RequestMethod.GET)
-    public Result<User> isLogin(HttpServletRequest request) {
-        return userService.isLogin(request.getSession());
-    }
-
     @RequestMapping(value="/logout",method= RequestMethod.GET)
-    public Result logout(HttpServletRequest request) {
-        Result result = new Result();
-        // User logout: The user information in the session can be set to null
-        request.getSession().setAttribute(SESSION_NAME, null);
+    public Result<String> logout(HttpServletRequest request) {
+        Result<String> result = new Result<>();
+        Session.setUserInfo(request, null);
         result.setResultSuccess("Logout success", "");
         return result;
     }
@@ -69,16 +55,14 @@ public class UserController {
     @RequestMapping(value="/info",method= RequestMethod.GET)
     public Result<User> getUserInfo(HttpServletRequest request) {
         Result<User> result = new Result<>();
-        Object session = request.getSession().getAttribute(SESSION_NAME);
+        User user = Session.getUserInfo(request);
 
-        if (session == null){
+        if(user == null) {
             result.setResultFailed("Userinfo is null");
-            return result;
-        }else {
-            int sessionUserId = (int)session;
-            result.setResultSuccess("get user info success", userService.selectUserById(sessionUserId).getData());
-            return result;
+        } else {
+            result.setResultSuccess("get user info success", user);
         }
-    }
 
+        return result;
+    }
 }

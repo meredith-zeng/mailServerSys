@@ -16,10 +16,10 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // If not logged in, redirect to the home page, assuming the home page is /
-        if (!userService.isLogin(request.getSession()).isSuccess()) {
-            response.sendRedirect("/");
-            return false;
-        }
+//        if (!userService.isLogin(request.getSession()).isSuccess()) {
+//            response.sendRedirect("/");
+//            return false;
+//        }
         return true;
     }
 

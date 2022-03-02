@@ -59,21 +59,21 @@ const MailCompose: FC<Props> = ({defaultData, onClose}) => {
       >
         <Form.Item
           label="To"
-          name="recipient"
+          name="recipientEmailAddress"
         >
           <Input />
         </Form.Item>
 
         <Form.Item
           label="Title"
-          name="title"
+          name="mailTitle"
         >
           <Input />
         </Form.Item>
 
         <Form.Item
           label="Content"
-          name="content"
+          name="mailContent"
           className="content-box"
         >
           <Input.TextArea rows={4} />

@@ -23,31 +23,24 @@ public class InboxServiceImpl implements InboxService {
     ReceivedMailMapper receivedMailMapper;
 
     @Override
-    public Result<MailVo> queryInboxMail(int ownerId, int page, int pageSize) {
-        Result result = new Result();
+    public Result<PageInfo<MailVo>> queryInboxMail(int ownerId, int page, int pageSize) {
+        Result<PageInfo<MailVo>> result = new Result<>();
         PageHelper.startPage(page, pageSize);
         List<MailVo> mailVoList = receivedMailMapper.queryInboxMail(ownerId);
-        if (mailVoList.isEmpty()){
-            result.setResultFailed("Inbox is empty");
-            return result;
-        }
         PageInfo<MailVo> pageInfo = new PageInfo<>(mailVoList);
         result.setResultSuccess("Query inbox email success", pageInfo);
         return result;
     }
 
     @Override
-    public Result readInboxMail(int mailId) {
-        Result result = new Result();
+    public Result<String> readInboxMail(int mailId) {
+        Result<String> result = new Result<>();
         int readRes = receivedMailMapper.updateReadStatus(mailId);
         if (readRes == 0){
             result.setResultFailed("Read mail fail");
-            return result;
+        } else {
+            result.setResultSuccess("Read mail success");
         }
-        MailVo mailVo = new MailVo();
-        Mail mail = mailMapper.selectByPrimaryKey(mailId);
-        BeanUtils.copyProperties(mail, mailVo);
-        result.setResultSuccess("Read mail success", mailVo);
         return result;
     }
 

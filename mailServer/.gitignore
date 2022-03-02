@@ -48,5 +48,5 @@ yarn-debug.log*
 yarn-error.log*
 
 #Ignore Configuration files
-/application.yml
-/generatorConfig.xml
+application.yml
+generatorConfig.xml

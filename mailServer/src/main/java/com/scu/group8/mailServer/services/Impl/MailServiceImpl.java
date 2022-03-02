@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 public class MailServiceImpl implements MailService {
     @Autowired
@@ -45,8 +47,8 @@ public class MailServiceImpl implements MailService {
 
     @Override
     @Transactional
-    public Result sendMail(MailDto mailDto) {
-        Result result = new Result();
+    public Result<String> sendMail(MailDto mailDto) {
+        Result<String> result = new Result<>();
         Mail mail = new Mail();
         BeanUtils.copyProperties(mailDto, mail);
         // Step1: add mail
@@ -55,6 +57,7 @@ public class MailServiceImpl implements MailService {
             result.setResultFailed("Mail sent fail");
             return result;
         }
+
         // Step2: add receivedMail(Need one more function to check whether the recipient exist or not)
         User recipientUser = userMapper.selectByMailAddress(mailDto.getRecipientEmailAddress());
         int recipientId = recipientUser.getUserId();
@@ -80,7 +83,7 @@ public class MailServiceImpl implements MailService {
         if (sentMailRes == 0){
             result.setResultFailed("Mail sent fail");
         }
-        result.setResultSuccess("Mail sent success", " ");
+        result.setResultSuccess("Mail sent success", "");
         return result;
     }
 }

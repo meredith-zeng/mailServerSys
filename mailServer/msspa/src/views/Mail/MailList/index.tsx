@@ -1,5 +1,6 @@
 import './index.scss';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Pagination, Typography } from 'antd';
@@ -10,6 +11,8 @@ import { getMailList, readMail } from '../../../data/api';
 const { Text, Title, Paragraph } = Typography;
 
 const PAGE_SIZE = 20;
+
+dayjs.extend(utc);
 
 interface Props {
   openCompose: any,
@@ -27,19 +30,24 @@ const MailList: FC<Props> = ({openCompose}) => {
   }
 
   useEffect(() => {
-    getMailList({
-      category,
-      page: page-1,
-      size: PAGE_SIZE
-    }).then(({data}) => {
-      setListData(data);
-    })
+    if(!showDetail) {
+      getMailList({
+        category,
+        page: page,
+        size: PAGE_SIZE
+      }).then(({data}) => {
+        setListData(data);
+      })
+    }
+  }, [page, category, showDetail])
+
+  const returnToList = (item: any) => {
     setShowDetail(false);
-  }, [page, category])
+  }
 
   const onSelectItem = (item: any) => {
     if(category === "2") {
-      readMail({mailId: item.id});
+      readMail({mailId: item.mailId});
     }
 
     if(category !== "0") {
@@ -63,15 +71,15 @@ const MailList: FC<Props> = ({openCompose}) => {
       </div>
       <div className="mail-content">
       {listData.list && listData.list.map((item:any) => {
-        const { sender, recipient, title, content } = item;
-
+        let isRead = category === '2' && item.readStatus === 1;
         return (
-          <div key={item.id} className="mail-list-item" onClick={() => {onSelectItem(item)}}>
-            <Text className="mail-people" ellipsis>{category === "2" ? sender : recipient}</Text>
+          <div key={item.mailId} className={`mail-list-item ${isRead ? 'item-read' : ''}`} onClick={() => {onSelectItem(item)}}>
+            <Text className="mail-people" ellipsis>{category === "2" ? item.senderEmailAddress : item.recipientEmailAddress}</Text>
             <Text className="mail-info" ellipsis>
-              <Text className="mail-title">{title}</Text>
-              <Text className="mail-content"> - {content}</Text>
+              <Text className="mail-title">{item.mailTitle}</Text>
+              <Text className="mail-content"> - {item.mailContent}</Text>
             </Text>
+            <Text className="mail-time">{dayjs(item.sendingTime).utcOffset(0).format('h:mm A')}</Text>
           </div>
         );
       })}
@@ -79,25 +87,21 @@ const MailList: FC<Props> = ({openCompose}) => {
     </div>
   );
 
-  const returnToList = (item: any) => {
-    setShowDetail(false);
-  }
-
   const detailContent = (
     <div className="mail-list-container">
       <div className="mail-opt">
         <ArrowLeftOutlined className="opt-back" onClick={returnToList}/>
       </div>
       <div className="mail-content mail-detail">
-        <Title className="mail-title" level={2}>{detailData.title}</Title>
+        <Title className="mail-title" level={2}>{detailData.mailTitle}</Title>
         <div className="mail-people">
           <div className="name-box">
-            <div className="mail-sender">{detailData.sender}</div>
-            <div className="mail-recipient">to {detailData.recipient}</div>
+            <div className="mail-sender">{detailData.senderEmailAddress}</div>
+            <div className="mail-recipient">to {detailData.recipientEmailAddress}</div>
           </div>
-          <div className="send-time">{dayjs(detailData.sendingTime).format('MMM DD, YYYY, h:mm A')}</div>
+          <div className="send-time">{dayjs(detailData.sendingTime).utcOffset(0).format('MMM DD, YYYY, h:mm A')}</div>
         </div>
-        <Paragraph className="mail-text">{detailData.content}</Paragraph>
+        <Paragraph className="mail-text">{detailData.mailContent}</Paragraph>
       </div>
     </div>
   );

@@ -21,16 +21,12 @@ public class OutboxServiceImpl implements OutboxService {
     MailMapper mailMapper;
 
     @Override
-    public Result<MailVo> queryOutboxMail(int ownerId, int page, int pageSize) {
-        Result result = new Result();
+    public Result<PageInfo<MailVo>> queryOutboxMail(int ownerId, int page, int pageSize) {
+        Result<PageInfo<MailVo>> result = new Result<>();
         PageHelper.startPage(page, pageSize);
         List<MailVo> mailVoList = sentMailMapper.queryOutboxMail(ownerId);
-        if (mailVoList.isEmpty()){
-            result.setResultFailed("Outbox is empty");
-            return result;
-        }
         PageInfo<MailVo> pageInfo = new PageInfo<>(mailVoList);
-        result.setResultSuccess("Query Outbox email success", pageInfo);
+        result.setResultSuccess("Query outbox email success", pageInfo);
         return result;
     }
 
