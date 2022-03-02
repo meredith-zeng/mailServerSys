@@ -50,6 +50,7 @@ public class MailController {
     public Result draftMail(@RequestBody MailDto mailDto, HttpServletRequest request){
         User user = Session.getUserInfo(request);
         mailDto.setSenderId(user.getUserId());
+        mailDto.setSenderEmailAddress(user.getUserEmailAddress());
         return mailService.createOrUpdateDraft(mailDto);
     }
 
