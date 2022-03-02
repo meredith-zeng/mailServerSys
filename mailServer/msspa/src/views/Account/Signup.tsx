@@ -29,7 +29,7 @@ const Signup: FC = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="Username"
+          label="Email"
           name="userEmailAddress"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >

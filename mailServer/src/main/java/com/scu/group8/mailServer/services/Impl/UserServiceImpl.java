@@ -31,14 +31,16 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Result<String> signUp(User record) {
-        Result<String> result = new Result<>();
+    public Result signUp(User record) {
+        Result result = new Result<>();
         if (userMapper.selectByMailAddress(record.getUserEmailAddress()) != null){
             result.setResultFailed("Email Address exist");
             return result;
         }
-        if (userMapper.insert(record) == 1){
-            result.setResultSuccess("Signup success", "");
+
+        int insertRes = userMapper.insert(record);
+        if (insertRes == 0){
+            result.setResultFailed("User signup failed");
         }
         return result;
     }

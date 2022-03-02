@@ -27,6 +27,9 @@ const MailCompose: FC<Props> = ({defaultData, onClose}) => {
 
   const onDraft = async () => {
     let values = form.getFieldsValue(true);
+    if(defaultData.mailId) {
+      values.mailId = defaultData.mailId;
+    }
     const { error } = await draftMail(values);
     if(!error) {
       message.success('Save successfully!');

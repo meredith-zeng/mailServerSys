@@ -19,24 +19,13 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value="/signup",method= RequestMethod.POST)
-    public Result<String> register(@RequestBody @Valid User user, BindingResult errors) {
-        Result<String> result = new Result<>();
-        // Error Handler
-        if (errors.hasErrors()) {
-            result.setResultFailed(errors.getFieldError().getDefaultMessage());
-            return result;
-        }
+    public Result register(@RequestBody @Valid User user) {
         return userService.signUp(user);
     }
 
     @RequestMapping(value="/login",method= RequestMethod.POST)
-    public Result<User> login(@RequestBody @Valid User user, BindingResult errors, HttpServletRequest request) {
-        Result<User> result = new Result<>();
-        if (errors.hasErrors()) {
-            result.setResultFailed(errors.getFieldError().getDefaultMessage());
-            return result;
-        }
-        result = userService.login(user);
+    public Result<User> login(@RequestBody @Valid User user, HttpServletRequest request) {
+        Result<User> result = userService.login(user);
         // set session
         if (result.isSuccess()) {
             Session.setUserInfo(request, result.getData());
@@ -45,10 +34,10 @@ public class UserController {
     }
 
     @RequestMapping(value="/logout",method= RequestMethod.GET)
-    public Result<String> logout(HttpServletRequest request) {
-        Result<String> result = new Result<>();
+    public Result logout(HttpServletRequest request) {
+        Result result = new Result();
         Session.setUserInfo(request, null);
-        result.setResultSuccess("Logout success", "");
+        result.setResultSuccess("Logout success");
         return result;
     }
 

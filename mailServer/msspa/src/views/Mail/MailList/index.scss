@@ -64,6 +64,7 @@
 }
 
 .mail-list-item {
+  position: relative;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgb(100 121 143 / 20%);
@@ -72,6 +73,13 @@
   &:hover {
     background-color: #e6f7ff;
     cursor: pointer;
+
+    .time-text {
+      display: none;
+    }
+    .opt-del {
+      display: block;
+    }
   }
 
   .mail-people,
@@ -96,7 +104,27 @@
   }
 
   .mail-time {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
     flex-shrink: 0;
+  }
+
+  .time-text {
+    display: block;
+  }
+
+  .opt-del {
+    display: none;
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    &:hover {
+      cursor: pointer;
+      background-color: #eee;
+    }
   }
 
   &.item-read {
