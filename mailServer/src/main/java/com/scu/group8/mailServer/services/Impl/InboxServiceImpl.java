@@ -4,18 +4,27 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.scu.group8.mailServer.dao.MailMapper;
 import com.scu.group8.mailServer.dao.ReceivedMailMapper;
+import com.scu.group8.mailServer.dto.MailDto;
 import com.scu.group8.mailServer.pojo.Mail;
+import com.scu.group8.mailServer.pojo.ReceivedMail;
+import com.scu.group8.mailServer.pojo.SentMail;
+import com.scu.group8.mailServer.pojo.User;
 import com.scu.group8.mailServer.services.InboxService;
 import com.scu.group8.mailServer.utils.Result;
 import com.scu.group8.mailServer.vo.MailVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class InboxServiceImpl implements InboxService {
+
+    @Autowired
+    MailMapper userMapper;
+
     @Autowired
     MailMapper mailMapper;
 
@@ -33,8 +42,21 @@ public class InboxServiceImpl implements InboxService {
     }
 
     @Override
-    public Result<String> readInboxMail(int mailId) {
-        Result<String> result = new Result<>();
+    @Transactional
+    public Result deleteInboxMail(int mailId) {
+        Result result = new Result();
+        int deleteRes = receivedMailMapper.deleteMail(mailId);
+        if (deleteRes == 0){
+            result.setResultFailed("Delete mail fail");
+        }
+        result.setResultSuccess("Delete mail success");
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public Result readInboxMail(int mailId) {
+        Result result = new Result();
         int readRes = receivedMailMapper.updateReadStatus(mailId);
         if (readRes == 0){
             result.setResultFailed("Read mail fail");
@@ -44,14 +66,4 @@ public class InboxServiceImpl implements InboxService {
         return result;
     }
 
-    @Override
-    public Result deleteInboxMail(int mailId) {
-        Result result = new Result();
-        int deleteRes = receivedMailMapper.deleteMail(mailId);
-        if (deleteRes == 0){
-            result.setResultFailed("Delete mail fail");
-        }
-        result.setResultSuccess("Delete mail success", " ");
-        return result;
-    }
 }

@@ -15,7 +15,9 @@ const MailCompose: FC<Props> = ({defaultData, onClose}) => {
 
   const onSend = async () => {
     let values = await form.validateFields();
-    console.log(values);
+    if(defaultData.mailId) {
+      values.mailId = defaultData.mailId;
+    }
     const { error } = await sendMail(values);
     if(!error) {
       message.success('Sent successfully!');
@@ -25,7 +27,6 @@ const MailCompose: FC<Props> = ({defaultData, onClose}) => {
 
   const onDraft = async () => {
     let values = form.getFieldsValue(true);
-    console.log(values);
     const { error } = await draftMail(values);
     if(!error) {
       message.success('Save successfully!');
@@ -38,9 +39,9 @@ const MailCompose: FC<Props> = ({defaultData, onClose}) => {
   };
 
   const initialData = {
-    recipient: defaultData.recipient,
-    title: defaultData.title,
-    content: defaultData.content,
+    recipientEmailAddress: defaultData.recipientEmailAddress,
+    mailTitle: defaultData.mailTitle,
+    mailContent: defaultData.mailContent,
   }
 
   return (

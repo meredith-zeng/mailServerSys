@@ -16,14 +16,6 @@ public class UserServiceImplTest{
     private UserService userService;
 
     @Test
-    public void testSelectUserById() {
-        int rightId = 1;
-        int errorId = 10000;
-        System.out.println(userService.selectUserById(rightId).getData().getUserEmailAddress());
-        System.out.println(userService.selectUserById(errorId).getMessage());
-    }
-
-    @Test
     public void testLogin() {
         User user = new User();
         String emailArr = "nakano1968@yahoo.com";

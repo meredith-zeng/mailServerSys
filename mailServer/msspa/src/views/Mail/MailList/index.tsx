@@ -3,10 +3,10 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Pagination, Typography } from 'antd';
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Pagination, Typography, message } from 'antd';
+import { ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import { getMailList, readMail } from '../../../data/api';
+import { deleteMail, getMailList, readMail } from '../../../data/api';
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -16,9 +16,10 @@ dayjs.extend(utc);
 
 interface Props {
   openCompose: any,
+  showCompose: boolean
 }
 
-const MailList: FC<Props> = ({openCompose}) => {
+const MailList: FC<Props> = ({openCompose, showCompose}) => {
   const { category } = useParams();
   let [page, setPage] = useState(1);
   let [listData, setListData] = useState<any>({});
@@ -30,7 +31,7 @@ const MailList: FC<Props> = ({openCompose}) => {
   }
 
   useEffect(() => {
-    if(!showDetail) {
+    if(!showDetail || !showCompose) {
       getMailList({
         category,
         page: page,
@@ -39,7 +40,11 @@ const MailList: FC<Props> = ({openCompose}) => {
         setListData(data);
       })
     }
-  }, [page, category, showDetail])
+  }, [page, category, showDetail, showCompose])
+
+  useEffect(() => {
+    setShowDetail(false);
+  }, [category])
 
   const returnToList = (item: any) => {
     setShowDetail(false);
@@ -55,6 +60,18 @@ const MailList: FC<Props> = ({openCompose}) => {
       setShowDetail(true);
     } else {
       openCompose(item);
+    }
+  }
+
+  const onDelete = async () => {
+    const { error } = await deleteMail({
+      mailId: detailData.mailId,
+      category: category
+    })
+
+    if(!error) {
+      message.success('Deleted successfully!');
+      setShowDetail(false);
     }
   }
 
@@ -91,6 +108,7 @@ const MailList: FC<Props> = ({openCompose}) => {
     <div className="mail-list-container">
       <div className="mail-opt">
         <ArrowLeftOutlined className="opt-back" onClick={returnToList}/>
+        <DeleteOutlined className="opt-del" onClick={onDelete} />
       </div>
       <div className="mail-content mail-detail">
         <Title className="mail-title" level={2}>{detailData.mailTitle}</Title>

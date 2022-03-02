@@ -24,10 +24,12 @@
   border-bottom: 1px solid rgb(100 121 143 / 20%);
   padding: 0 10px;
   
-  .opt-back {
+  .opt-back,
+  .opt-del {
     font-size: 18px;
     padding: 6px;
     border-radius: 50%;
+    margin-right: 6px;
     &:hover {
       cursor: pointer;
       background-color: #eee;

@@ -49,13 +49,6 @@ export const userInfo = async () => {
   return getData({
     url: `${baseUrl}/user/info`,
   }, false)
-
-  // return {
-  //   data: {
-  //     username: 'testUserName',
-  //   },
-  //   error: null
-  // }
 }
 
 export const userSignup = async (params: any) => {
@@ -71,93 +64,20 @@ export const getMailList = async (params: any) => {
     url: `${baseUrl}/mail/list`,
     params,
   })
-
-  // return {
-  //   data: {
-  //     total: 200,
-  //     page: 0,
-  //     list: [{
-  //       id: 1111,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 2222,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 3333,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 4444,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 55,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 66,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 77,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 88,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }, {
-  //       id: 99,
-  //       sender: 'xxxxxxxxx',
-  //       recipient: 'yyyyyyyyy',
-  //       title: 'imtitleimtitleimtitleimtitleimtitle',
-  //       content: 'imcontentimcontentimcontentimcontentimcontent',
-  //       sendingTime: 1645468819229,
-  //       status: 0,
-  //     }]
-  //   },
-  //   error: null
-  // };
 }
 
 export const readMail = async (params: any) => {
   return getData({
     method: 'POST',
     url: `${baseUrl}/mail/read`,
+    data: params
+  })
+}
+
+export const deleteMail = async (params: any) => {
+  return getData({
+    method: 'POST',
+    url: `${baseUrl}/mail/delete`,
     data: params
   })
 }

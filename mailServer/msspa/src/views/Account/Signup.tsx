@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {Form, Input, Button, Typography, Row, Col, message} from 'antd';
 import { userSignup } from '../../data/api';
 
 const { Title } = Typography;
 
 const Signup: FC = () => {
-  const navigate = useNavigate();
   const onFinish = async (values: any) => {
     const { error } = await userSignup(values);
     if(!error) {

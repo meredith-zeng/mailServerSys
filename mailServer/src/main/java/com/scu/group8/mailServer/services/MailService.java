@@ -9,4 +9,5 @@ import java.util.List;
 public interface MailService {
     Result<Mail> selectMailByMailId(int mailId);
     Result<String> sendMail(MailDto mailDto);
+    Result createOrUpdateDraft(MailDto mailDto);
 }

@@ -16,13 +16,6 @@ public class DraftServiceImplTest extends TestCase {
     DraftService draftService;
 
     @Test
-    public void testSelectDraftByMailId() {
-        int mailId = 27;
-        System.out.println(draftService.selectDraftByMailId(mailId).getData());
-
-    }
-
-    @Test
     public void testQueryDraftByOwnerId() {
         int ownerId = 1, page = 1, pageSize = 2;
         draftService.queryDraftByOwnerId(ownerId, page, pageSize);

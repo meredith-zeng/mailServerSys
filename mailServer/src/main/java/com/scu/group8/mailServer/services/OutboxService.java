@@ -5,6 +5,6 @@ import com.scu.group8.mailServer.utils.Result;
 import com.scu.group8.mailServer.vo.MailVo;
 
 public interface OutboxService {
-    Result<PageInfo<MailVo>> queryOutboxMail(int ownerId, int page, int pageSize);
+    Result<PageInfo<MailVo>> queryOutboxMail(int ownerId, int page, int pageSize, int sendStatus);
     Result deleteOutboxMail(int mailId);
 }

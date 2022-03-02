@@ -20,13 +20,6 @@ public class OutboxServiceImplTest extends TestCase {
     OutboxService outboxService;
 
     @Test
-    public void testQueryOutboxMail() {
-        int ownerId = 1, page = 1, pageSize = 1;
-        Result<PageInfo<MailVo>> list = outboxService.queryOutboxMail(ownerId, page, pageSize);
-        System.out.println(list.getData());
-
-    }
-    @Test
     public void testDeleteOutboxMail() {
         int mailId = 22;
         outboxService.deleteOutboxMail(mailId);

@@ -4,12 +4,18 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.scu.group8.mailServer.dao.MailMapper;
 import com.scu.group8.mailServer.dao.SentMailMapper;
+import com.scu.group8.mailServer.dto.MailDto;
+import com.scu.group8.mailServer.pojo.Mail;
+import com.scu.group8.mailServer.pojo.ReceivedMail;
 import com.scu.group8.mailServer.pojo.SentMail;
+import com.scu.group8.mailServer.pojo.User;
 import com.scu.group8.mailServer.services.OutboxService;
 import com.scu.group8.mailServer.utils.Result;
 import com.scu.group8.mailServer.vo.MailVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,10 +27,17 @@ public class OutboxServiceImpl implements OutboxService {
     MailMapper mailMapper;
 
     @Override
-    public Result<PageInfo<MailVo>> queryOutboxMail(int ownerId, int page, int pageSize) {
+    public Result<PageInfo<MailVo>> queryOutboxMail(int ownerId, int page, int pageSize, int sendStatus) {
         Result<PageInfo<MailVo>> result = new Result<>();
         PageHelper.startPage(page, pageSize);
-        List<MailVo> mailVoList = sentMailMapper.queryOutboxMail(ownerId);
+        List<MailVo> mailVoList;
+
+        if(sendStatus == 0) {
+            mailVoList = sentMailMapper.queryDraftMail(ownerId);
+        } else {
+            mailVoList = sentMailMapper.queryOutboxMail(ownerId);
+        }
+
         PageInfo<MailVo> pageInfo = new PageInfo<>(mailVoList);
         result.setResultSuccess("Query outbox email success", pageInfo);
         return result;
@@ -40,4 +53,6 @@ public class OutboxServiceImpl implements OutboxService {
         result.setResultSuccess("Delete outbox mail success", " ");
         return result;
     }
+
+
 }

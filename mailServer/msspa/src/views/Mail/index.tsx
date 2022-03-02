@@ -49,7 +49,7 @@ const Mail: FC = () => {
           </Menu>
         </Sider>
         <Content className="content">
-          <MailList openCompose={openCompose}/>
+          <MailList openCompose={openCompose} showCompose={showCompose}/>
           {showCompose ? <MailCompose defaultData={composeData} onClose={closeCompose}/> : null}
         </Content>
       </Layout>

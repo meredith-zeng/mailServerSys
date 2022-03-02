@@ -15,6 +15,8 @@ public interface SentMailMapper {
 
     List<MailVo> queryOutboxMail(int ownerId);
 
+    List<MailVo> queryDraftMail(int ownerId);
+    
     int deleteOutboxMail(int mailId);
 
 }

@@ -7,6 +7,7 @@ public class SentMail {
     private Integer mailId;
     private Integer ownerId;
     private Integer receivedUserId;
+    private Integer sendStatus;
     private Integer isDeleted;
 
 }

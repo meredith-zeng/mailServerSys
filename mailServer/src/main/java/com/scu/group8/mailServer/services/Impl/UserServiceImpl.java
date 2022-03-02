@@ -14,18 +14,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public Result<User> selectUserById(int userId) {
-        Result<User> result = new Result<>();
-        User res= userMapper.selectByPrimaryKey(userId);
-        if (res != null){
-            result.setResultSuccess("selectUserById success", res);
-        }else {
-            result.setResultFailed("selectUserById error");
-        }
-        return result;
-    }
-
-    @Override
     public Result<User> login(User user) {
         Result<User> result = new Result<>();
         User res = userMapper.selectByMailAddress(user.getUserEmailAddress());

@@ -13,4 +13,6 @@ public class MailDto {
     private String mailTitle;
     private String mailContent;
     private Date sendingTime;
+
+    private Integer category;
 }

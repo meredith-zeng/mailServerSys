@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useNavigate, Outlet } from "react-router-dom";
 
 import { useUser } from './UserProvider';
@@ -6,16 +6,19 @@ import { useUser } from './UserProvider';
 const App: FC = () => {
   const navigate = useNavigate();
   const { getUserInfo } = useUser();
+  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getUserInfo(() => {
       navigate('/mail');
+      setLoading(false);
     }, () => {
-      navigate('/account')
+      navigate('/account');
+      setLoading(false);
     })
   }, []);
 
-  return <Outlet />;
+  return !loading ? <Outlet /> : null;
 };
 
 export default App;
