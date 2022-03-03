@@ -110,7 +110,7 @@ const MailList: FC<Props> = ({openCompose, showCompose}) => {
 
         return (
           <div key={item.mailId} className={`mail-list-item ${isRead ? 'item-read' : ''}`} onClick={() => {onSelectItem(item)}}>
-            <Text className="mail-people" ellipsis>{category === "2" ? item.senderEmailAddress : item.recipientEmailAddress}</Text>
+            <Text className="mail-people" ellipsis>{category === "2" ? item.senderEmailAddress : "To: "+item.recipientEmailAddress}</Text>
             <Text className="mail-info" ellipsis>
               <Text className="mail-title">{item.mailTitle}</Text>
               <Text className="mail-content"> - {item.mailContent}</Text>
