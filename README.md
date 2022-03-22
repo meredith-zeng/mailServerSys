@@ -61,7 +61,7 @@ Use cases for Mail Server:
 * Delete emails: User can delete any email in any of their boxes.
 
 ### Use Case Diagram
-  ![use case diagram](mailServer/Project Diagrams/usecase.png)
+![](Project Diagrams/usecase.png)
 
 ## OO Concepts
 MVC Model
@@ -82,7 +82,7 @@ Polymorphism:
 * MailController serves both inbox and outbox mails.
 
 ## Class Diagram
-![class diagram](mailServer/Project Diagrams/class.png)
+![](Project Diagrams/class.png)
 ## Classes
 POJO:
 * User: Represents the user by the user’s ID, email address, and password.
@@ -107,35 +107,35 @@ Controllers:
 * UserController: Handles all “/user” URL subdirectories. Deliver service results related to login, logout, register, and get user info.
 
 ## Activity Diagram
-![](mailServer/Project Diagrams/activity.png)
+![](Project Diagrams/activity.png)
 
 ## Sequence Diagram (Large Scale)
 ### Login
-![](mailServer/Project Diagrams/login1.png)
+![](Project Diagrams/login1.png)
 ### SignUp
-![](mailServer/Project Diagrams/signup1.png)
+![](Project Diagrams/signup1.png)
 ### Draft
-![](mailServer/Project Diagrams/draft1.png)
+![](Project Diagrams/draft1.png)
 ### Send
-![](mailServer/Project Diagrams/send1.png)
+![](Project Diagrams/send1.png)
 ### Look at Inbox
-![](mailServer/Project Diagrams/inbox1.png)
+![](Project Diagrams/inbox1.png)
 ### Read Email
-![](mailServer/Project Diagrams/read1.png)
+![](Project Diagrams/read1.png)
 
 ## Sequence Diagram (Small Scale)
 ### Login
-![](mailServer/Project Diagrams/login2.png)
+![](Project Diagrams/login2.png)
 ### SignUp
-![](mailServer/Project Diagrams/signup2.png)
+![](Project Diagrams/signup2.png)
 ### Draft
-![](mailServer/Project Diagrams/draft2.png)
+![](Project Diagrams/draft2.png)
 ### Send
-![](mailServer/Project Diagrams/send2.png)
+![](Project Diagrams/send2.png)
 ### Look at Inbox
-![](mailServer/Project Diagrams/inbox2.png)
+![](Project Diagrams/inbox2.png)
 ### Read Email
-![](mailServer/Project Diagrams/read2.png)
+![](Project Diagrams/read2.png)
 
 
 
