@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @EnableSpringHttpSession
 public class SessionConfig {
 
-
     @Bean
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
