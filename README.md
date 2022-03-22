@@ -61,7 +61,7 @@ Use cases for Mail Server:
 * Delete emails: User can delete any email in any of their boxes.
 
 ### Use Case Diagram
-  ![](mailServer/Project Diagrams/usecase.png)
+  ![](../mailServer/Project Diagrams/usecase.png)
 
 ## OO Concepts
 MVC Model
