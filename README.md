@@ -61,7 +61,7 @@ Use cases for Mail Server:
 * Delete emails: User can delete any email in any of their boxes.
 
 ### Use Case Diagram
-  ![](../mailServer/Project Diagrams/usecase.png)
+  ![use case diagram](mailServer/Project Diagrams/usecase.png)
 
 ## OO Concepts
 MVC Model
@@ -82,7 +82,7 @@ Polymorphism:
 * MailController serves both inbox and outbox mails.
 
 ## Class Diagram
-![](mailServer/Project Diagrams/class.png)
+![class diagram](mailServer/Project Diagrams/class.png)
 ## Classes
 POJO:
 * User: Represents the user by the user’s ID, email address, and password.
